@@ -25,12 +25,18 @@ app.get("/api/hello", function(req, res) {
 });
 
 // Timestamp API
-
+app.get("/api", function(req, res) {
+  let date = new Date();
+  res.json({ "unix": date.getTime(), "utc": date.toGMTString() });
+});
 app.get("/api/:time", function(req, res) {
   let time = req.params.time;
   let date;
   if (isNaN(time)) {
     date = new Date(time)
+    if (date.getTime() == num) {
+      res.json({ error: "Invalid Date" });
+    }
   } else {
     date = new Date(new Number(time));
   }
